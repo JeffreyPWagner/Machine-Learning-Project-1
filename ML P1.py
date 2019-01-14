@@ -2,11 +2,10 @@ import csv
 import numpy as np
 from matplotlib import pyplot as plt
 
-path = r"C:\Users\jeffp\OneDrive\Documents\GitHub\Machine-Learning-Project-1\downloads.txt"
-file = open(path)
-reader = csv.reader(file)
-
+# declare variables
 nextVal = None
+x = 0
+y = 0
 sumX = 0
 sumY = 0
 sumProdXY = 0
@@ -18,6 +17,11 @@ intercept = 0
 maxX = 0
 data = []
 
+# open and read downloads file
+path = r"C:\Users\jeffp\OneDrive\Documents\GitHub\Machine-Learning-Project-1\downloads.txt"
+file = open(path)
+reader = csv.reader(file)
+
 # populate two dimensional list (data) with entries
 for row in reader:
     hour = int(row[0])
@@ -27,7 +31,9 @@ for row in reader:
         downloads = None
     data.append([hour, downloads])
 
-# replace missing values with mean of two adjacent valid values unless it is the first or last valid value
+file.close()
+
+# replace missing values with mean of two adjacent valid values
 for i in range(len(data)):
     if data[i][1] is None and i != 0 and i != (len(data) - 1) and data[i - 1][1] is not None:
             j = 1
@@ -74,6 +80,3 @@ plt.show()
 x = maxX + (24 * 4) + 12
 y = intercept + (slope * x)
 print(round(y))
-
-
-
