@@ -42,6 +42,7 @@ for i in range(len(data)):
                 nextVal = data[i + j][1]
                 data[i][1] = (nextVal + data[i-1][1]) // 2
 
+# linear regression using simple least squares method
 for i in range(len(data)):
     if data[i][1] is not None:
         curX = data[i][0]
@@ -61,7 +62,7 @@ intercept = (sumY - (slope * sumX)) / numPoints
 x = np.array(range(0, maxX))
 y = intercept + (slope * x)
 
-print(slope, intercept)
+# graph data and trend line
 plt.plot(x, y, 'red')
 plt.scatter(*zip(*data))
 plt.title('Previous Month Downloads')
@@ -69,6 +70,10 @@ plt.xlabel('Hour')
 plt.ylabel('Downloads')
 plt.show()
 
+# estimate downloads on noon of fifth day of following month
+x = maxX + (24 * 4) + 12
+y = intercept + (slope * x)
+print(round(y))
 
 
 
